@@ -34,8 +34,8 @@
     <li class="{{ request()->is('admin') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
     <li class="{{ request()->is('dashboard/category') ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="fa fa-th"></i> <span>All Categories</span></a></li>
     <li class="{{ request()->is('dashboard/category/create') ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="fa fa-th"></i> <span>Add Category</span></a></li>
-    <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>All Brands</span></a></li>
-    <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Add Brand</span></a></li>
+    <li class="{{ request()->is('dashboard/brand') ? 'active' : '' }}"><a href="{{ route('brand.index') }}"><i class="fa fa-th"></i> <span>All Brands</span></a></li>
+    <li class="{{ request()->is('dashboard/brand/create') ? 'active' : '' }}"><a href="{{ route('brand.create') }}"><i class="fa fa-th"></i> <span>Add Brand</span></a></li>
     <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>All Products</span></a></li>
     <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Add Product</span></a></li>
     <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Slider</span></a></li>
