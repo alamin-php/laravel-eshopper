@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('dashboard/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('dashboard/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('dashboard/category/add', [CategoryController::class, 'add'])->name('category.add');
+    Route::get('dashboard/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('dashboard/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::get('dashboard/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+    Route::get('dashboard/category/approval/{id}', [CategoryController::class, 'catApproval'])->name('category.cat_approval');
 });
 

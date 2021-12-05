@@ -40,12 +40,20 @@
                     <td>{{ $category->category_discription }}</td>
                     <td>
                       @if($category->category_status == 1)
-                        Published
-                        @else
-                        Unpublish
+                       <span class="label label-success">Published</span>
+                       @else
+                       <span class="label label-danger">Unpublish</span>
                       @endif</td>
                     <td>
-                      <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                      <a href="{{ route('category.cat_approval', $category->id) }}" class="btn btn-danger btn-sm">
+                        @if($category->category_status == true)
+                        <i class="fa fa-thumbs-down"></i>
+                        @else
+                        <i class="fa fa-thumbs-up"></i>
+                        @endif
+                      </a>
+
+                      <a href="{{ route('category.edit', $category->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                       <a href="{{ route('category.delete', $category->id) }}" class="btn btn-danger btn-sm" id="delete"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
