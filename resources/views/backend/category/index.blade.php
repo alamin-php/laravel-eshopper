@@ -45,12 +45,18 @@
                        <span class="label label-danger">Unpublish</span>
                       @endif</td>
                     <td>
-                      <a href="{{ route('category.cat_approval', $category->id) }}" class="btn btn-danger btn-sm">
-                        @if($category->category_status == true)
+                      <a href="{{ route('category.cat_approval', $category->id) }}"
+                      @if($category->category_status == true)
+                      class="btn btn-danger btn-sm"
+                      @else
+                      class="btn btn-success btn-sm"
+                      @endif
+                      >
+                      @if($category->category_status == true)
                         <i class="fa fa-thumbs-down"></i>
                         @else
                         <i class="fa fa-thumbs-up"></i>
-                        @endif
+                      @endif
                       </a>
 
                       <a href="{{ route('category.edit', $category->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
