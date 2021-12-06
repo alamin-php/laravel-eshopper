@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -38,5 +39,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('dashboard/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::get('dashboard/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
     Route::get('dashboard/brand/approval/{id}', [BrandController::class, 'brandApproval'])->name('brand.brand_approval');
+    // Product route here 
+    Route::get('dashboard/product', [ProductController::class, 'index'])->name('product.index');
+    Route::get('dashboard/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('dashboard/product/add', [ProductController::class, 'add'])->name('product.add');
+    Route::get('dashboard/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('dashboard/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('dashboard/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+    Route::get('dashboard/product/approval/{id}', [ProductController::class, 'productApproval'])->name('product.product_approval');
 });
 

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
-use DB;
 
 class ProductController extends Controller
 {
@@ -14,43 +15,88 @@ class ProductController extends Controller
     }
 
     public function index(){
-        $products = DB::table('products')->orderBy('brand_name', 'ASC')->get();
-        return view("backend.brand.index", ['products' => $products]);
+        $products = DB::table('products')
+        ->join('categories', 'categories.id','=', 'products.cat_id')
+        ->join('brands', 'brands.id','=', 'products.brand_id')
+        ->select('products.*', 'categories.category_name', 'brands.brand_name')
+        ->orderBy('products.id', 'DESC')->get();
+        return view("backend.product.index", ['products' => $products]);
     }
     
     public function create(){
-        return view("backend.brand.create");
+        $categories = DB::table('categories')
+        ->where('category_status', true)
+        ->orderBy('category_name', 'ASC')
+        ->get();
+        $brands = DB::table('brands')
+        ->where('brand_status', true)
+        ->orderBy('brand_name', 'ASC')
+        ->get();
+        return view("backend.product.create", [
+            'categories'=>$categories,
+            'brands'=>$brands,
+        ]);
     }    
     public function add(Request $request){
         $request->validate([
-            'brand_name' => 'required|unique:products|max:255',
+            'name' => 'required|max:255',
         ]);
         $data = array();
-        $data['brand_name'] = $request->brand_name;
-        $data['brand_discription'] = $request->brand_name;
-        $data['brand_status'] = true;
-        $insert_brand = DB::table("products")->insert($data);
-        if ($insert_brand) {
-            Toastr::success('Data Successfully Updated', 'Success');
+        $data['name'] = $request->name;
+        $data['cat_id'] = $request->cat_id;
+        $data['brand_id'] = $request->brand_id;
+        $data['short_description'] = $request->short_description;
+        $data['long_description'] = $request->long_description;
+        $data['price'] = $request->price;
+        $data['size'] = $request->size;
+        $data['color'] = $request->color;
+        if($request->has('status') == 1){
+            $data['status'] = true;
+        }else{
+            $data['status'] = false;
+        }
+        $image = $request->file('image');
+        if ($image) {
+            $image_name = Str::random(5);
+            $productName = $request->name;
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $productName.'-'.$image_name.'.'.$ext;
+            $upload_path = 'upload/products/';
+            $image_url = $upload_path.$image_full_name;
+            $success = $image->move($upload_path,$image_full_name);
+
+            if ($success) {
+                $data['image'] = $image_url;
+                $insert_product = DB::table("products")->insert($data);
+                if ($insert_product) {
+                    Toastr::success('Data Successfully Added', 'Success');
+                    return redirect()->back();
+                }
+            }
+        }
+        $data['image'] = 'upload/products/default.png';
+        $insert_product = DB::table("products")->insert($data);
+        if ($insert_product) {
+            Toastr::success('Data Successfully Added', 'Success');
             return redirect()->back();
         }
     }
 
     public function edit($id){
-        $brand = DB::table('products')->where('id', $id)->first();
-        return view("backend.brand.edit", ['brand' => $brand]);
+        $product = DB::table('products')->where('id', $id)->first();
+        return view("backend.product.edit", ['product' => $product]);
     }
 
     public function update(Request $request, $id){
-        $brand = DB::table('products')->where('id', $id)->first();
+        $product = DB::table('products')->where('id', $id)->first();
         $request->validate([
-            'brand_name' => 'required|unique:products,brand_name,'.$brand->id,
+            'product_name' => 'required|unique:products,product_name,'.$product->id,
         ]);
         $data = array();
-        $data['brand_name'] = $request->brand_name;
-        $data['brand_discription'] = $request->brand_discription;
-        $insert_brand = DB::table("products")->where('id', $id)->update($data);
-        if ($insert_brand) {
+        $data['product_name'] = $request->product_name;
+        $data['product_discription'] = $request->product_discription;
+        $insert_product = DB::table("products")->where('id', $id)->update($data);
+        if ($insert_product) {
             Toastr::success('Data Successfully Updated', 'Success');
             return redirect()->back();
         }else{
@@ -59,19 +105,19 @@ class ProductController extends Controller
     }
 
     public function delete($id){
-        $delete_brand = DB::table('products')->where('id', $id)->delete();
-        if ($delete_brand) {
+        $delete_product = DB::table('products')->where('id', $id)->delete();
+        if ($delete_product) {
             Toastr::success('Data Successfully deleted', 'Success');
-            return redirect()->route('brand.index');
+            return redirect()->route('product.index');
         }
     }
 
-    public function brandApproval($id){
-        $cat_status = DB::table('products')->where('id', $id)->first();
-        if($cat_status->brand_status == true){
+    public function productApproval($id){
+        $product_status = DB::table('products')->where('id', $id)->first();
+        if($product_status->status == true){
            $published = DB::table('products')
                         ->where('id', $id)
-                        ->update(['brand_status' => false]);
+                        ->update(['status' => false]);
             if ($published) {
                 Toastr::success('Data Successfully Updated', 'Success');
                 return redirect()->back();
@@ -79,7 +125,7 @@ class ProductController extends Controller
         }else{
             $unpublished = DB::table('products')
                         ->where('id', $id)
-                        ->update(['brand_status' => true]);
+                        ->update(['status' => true]);
             if ($unpublished) {
                 Toastr::success('Data Successfully Updated', 'Success');
                 return redirect()->back();
