@@ -23,7 +23,7 @@ class ProductFactory extends Factory
             'short_description' => $this->faker->sentence($nbWords = 2, $variableNbWords = true),
             'long_description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
             'price' => $this->faker->numberBetween($min = 900, $max = 10000),
-            'image' => 'upload/products/default.png',
+            'image' => '',
             'size' => $this->faker->numberBetween($min = 2, $max = 10),
             'color' => $this->faker->colorName(),
             'status' => true,

@@ -31,7 +31,7 @@
   <ul class="sidebar-menu" data-widget="tree">
     <li class="header">HEADER</li>
     <!-- Optionally, you can add icons to the links -->
-    <li class="{{ request()->is('admin') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
+    <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
     <li class="{{ request()->is('dashboard/category') ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="fa fa-th"></i> <span>All Categories</span></a></li>
     <li class="{{ request()->is('dashboard/category/create') ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="fa fa-th"></i> <span>Add Category</span></a></li>
     <li class="{{ request()->is('dashboard/brand') ? 'active' : '' }}"><a href="{{ route('brand.index') }}"><i class="fa fa-th"></i> <span>All Brands</span></a></li>

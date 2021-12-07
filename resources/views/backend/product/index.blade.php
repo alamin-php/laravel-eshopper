@@ -1,5 +1,5 @@
 @extends('layouts.backend.app')
-@section('title','product')
+@section('title','Product')
 @push('styles')
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -9,10 +9,10 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{ __('product') }}</h1>
+      <h1>{{ __('Product') }}<small>{{ __('All products list') }}</small></h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">product</li>
+        <li class="active">{{ __('Product') }}</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -21,14 +21,12 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">All products list</h3>
-             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
                 <tr>
-                  <th>Product Image</th>
-                  <th>Product Name</th>
+                  <th>Image</th>
+                  <th>Name</th>
                   <th>Category</th>
                   <th>Brand</th>
                   <th>Size</th>
@@ -40,7 +38,13 @@
                 <tbody>
                   @foreach($products as $product)
                   <tr>
-                    <td><img width="64" class="img-circle" src="{{ asset($product->image) }}" alt="{{ $product->name }}"></td>
+                    <td width="5%">
+                      @if($product->image)
+                      <img width="64" class="img-thumbnail" src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                      @else
+                      <img width="64" class="img-thumbnail" src="{{ asset('upload/default.png') }}" alt="{{ $product->name }}">
+                      @endif
+                    </td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->category_name }}</td>
                     <td>{{ $product->brand_name }}</td>

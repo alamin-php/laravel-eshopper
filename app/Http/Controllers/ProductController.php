@@ -83,28 +83,85 @@ class ProductController extends Controller
     }
 
     public function edit($id){
+        $categories = DB::table('categories')
+        ->where('category_status', true)
+        ->orderBy('category_name', 'ASC')
+        ->get();
+        $brands = DB::table('brands')
+        ->where('brand_status', true)
+        ->orderBy('brand_name', 'ASC')
+        ->get();
         $product = DB::table('products')->where('id', $id)->first();
-        return view("backend.product.edit", ['product' => $product]);
+        return view("backend.product.edit", [
+            'categories'=>$categories,
+            'brands'=>$brands,
+            'product' => $product
+        ]);
     }
 
     public function update(Request $request, $id){
         $product = DB::table('products')->where('id', $id)->first();
         $request->validate([
-            'product_name' => 'required|unique:products,product_name,'.$product->id,
+            'name' => 'required|max:255',
         ]);
         $data = array();
-        $data['product_name'] = $request->product_name;
-        $data['product_discription'] = $request->product_discription;
-        $insert_product = DB::table("products")->where('id', $id)->update($data);
-        if ($insert_product) {
-            Toastr::success('Data Successfully Updated', 'Success');
-            return redirect()->back();
+        $data['name'] = $request->name;
+        $data['cat_id'] = $request->cat_id;
+        $data['brand_id'] = $request->brand_id;
+        $data['short_description'] = $request->short_description;
+        $data['long_description'] = $request->long_description;
+        $data['price'] = $request->price;
+        $data['size'] = $request->size;
+        $data['color'] = $request->color;
+        if($request->has('status') == 1){
+            $data['status'] = true;
         }else{
-            return redirect()->back();
+            $data['status'] = false;
+        }
+        $image = $request->file('image');
+
+        if ($image) {
+            $image_name = Str::random(5);
+            $productName = $request->name;
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $productName.'-'.$image_name.'.'.$ext;
+            $upload_path = 'upload/products/';
+            $image_url = $upload_path.$image_full_name;
+            $success = $image->move($upload_path,$image_full_name);
+
+            if ($success) {
+                $data['image'] = $image_url;
+                $img = DB::table('products')->where('id', $id)->first();
+                $img_path = $img->image;
+                if($img_path){
+                    $done = unlink($img_path);
+                }
+                $save = DB::table('products')->where('id', $id)->update($data);
+                if ($save) {
+                    Toastr::success('Data Successfully Updated', 'Success');
+                    return redirect()->back();
+                }
+            }
+        }else{
+            $oldPhoto = $request->old_photo;
+                if ($oldPhoto) {
+                $data['image'] = $oldPhoto;
+                $save = DB::table('products')->where('id', $id)->update($data);
+                if ($save) {
+                    Toastr::success('Data Successfully Updated', 'Success');
+                    return redirect()->back();
+                }
+                return redirect()->back();
+            }
         }
     }
 
     public function delete($id){
+        $get_image = DB::table('products')->where('id', $id)->first();
+        $delete_image = $get_image->image;
+        if($delete_image){
+            \unlink($delete_image);
+        }
         $delete_product = DB::table('products')->where('id', $id)->delete();
         if ($delete_product) {
             Toastr::success('Data Successfully deleted', 'Success');
