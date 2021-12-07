@@ -31,13 +31,13 @@
   <ul class="sidebar-menu" data-widget="tree">
     <li class="header">HEADER</li>
     <!-- Optionally, you can add icons to the links -->
-    <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
+    <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
     <li class="{{ request()->is('dashboard/category') ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="fa fa-th"></i> <span>All Categories</span></a></li>
     <li class="{{ request()->is('dashboard/category/create') ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="fa fa-th"></i> <span>Add Category</span></a></li>
     <li class="{{ request()->is('dashboard/brand') ? 'active' : '' }}"><a href="{{ route('brand.index') }}"><i class="fa fa-th"></i> <span>All Brands</span></a></li>
     <li class="{{ request()->is('dashboard/brand/create') ? 'active' : '' }}"><a href="{{ route('brand.create') }}"><i class="fa fa-th"></i> <span>Add Brand</span></a></li>
-    <li class="{{ request()->is('dashboard/product') ? 'active' : '' }}"><a href="{{ route('product.index') }}"><i class="fa fa-th"></i> <span>All Products</span></a></li>
-    <li class="{{ request()->is('dashboard/product/create') ? 'active' : '' }}"><a href="{{ route('product.create') }}"><i class="fa fa-th"></i> <span>Add Product</span></a></li>
+    <li class="{{ request()->is('dashboard/product') ? 'active' : '' }}"><a href="{{ route('product.index') }}"><i class="fa fa-list"></i> <span>All Products</span></a></li>
+    <li class="{{ request()->is('dashboard/product/create') ? 'active' : '' }}"><a href="{{ route('product.create') }}"><i class="fa  fa-shopping-cart"></i> <span>Add Product</span></a></li>
     <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Slider</span></a></li>
     <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Social Link</span></a></li>
     <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Shop Name</span></a></li>

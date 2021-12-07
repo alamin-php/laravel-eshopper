@@ -1,5 +1,5 @@
 @extends('layouts.backend.app')
-@section('title','Create Product')
+@section('title','Add Product')
 @push('styles')
   <link rel="stylesheet" href="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 @endpush
@@ -8,11 +8,11 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{ __('Create product') }}</h1>
+      <h1>{{ __('Product') }} <small>Add a new product item.</small></h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{ route('product.index') }}"><i class="fa fa-user"></i> product</a></li>
-        <li class="active">Create</li>
+        <li class="active">Add</li>
       </ol>
     </section>
    <!-- Main content -->
@@ -21,7 +21,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ __('Create a new product') }}</h3>
+              <h3 class="box-title">{{ __('Add new') }}</h3>
             </div>
             <!-- /.box-header -->
             <form action="{{ route('product.add') }}" method="POST" enctype="multipart/form-data">
@@ -50,6 +50,11 @@
                             <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                             @endforeach
                             </select>
+                            @error('cat_id')
+                              <span class="invalid-feedback text-danger" role="alert">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                            @enderror
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -61,6 +66,11 @@
                             <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
                             @endforeach
                             </select>
+                            @error('brand_id')
+                              <span class="invalid-feedback text-danger" role="alert">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                            @enderror
                             </div>
                         </div>
                       </div>
@@ -69,18 +79,33 @@
                           <div class="form-group">
                             <label for="inputproductName"> {{ __('Product price') }}</label>
                             <input type="number" name="price" class="form-control" placeholder="Enter product price">
+                            @error('price')
+                              <span class="invalid-feedback text-danger" role="alert">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                            @enderror
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="inputproductName"> {{ __('Product size') }}</label>
                             <input type="text" name="size" class="form-control" placeholder="Enter product size">
+                            @error('size')
+                              <span class="invalid-feedback text-danger" role="alert">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                            @enderror
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="inputproductName"> {{ __('Product color') }}</label>
                             <input type="text" name="color" class="form-control" placeholder="Enter product color">
+                            @error('color')
+                              <span class="invalid-feedback text-danger" role="alert">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                            @enderror
                           </div>
                         </div>
                       </div>
@@ -89,7 +114,7 @@
                             <div class="form-group">
                             <label for="short_description"> {{ __('Short discription') }}</label>
                             <textarea class="textarea" name="short_description" placeholder="Enter product short description"
-                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                            style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                             @error('short_description')
                             <span class="invalid-feedback text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -99,7 +124,7 @@
                           <div class="form-group">
                             <label for="long_description"> {{ __('Long discription') }}</label>
                             <textarea class="textarea" name="long_description" placeholder="Enter product long description"
-                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                            style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                             @error('long_description')
                             <span class="invalid-feedback text-danger" role="alert">
                             <strong>{{ $message }}</strong>

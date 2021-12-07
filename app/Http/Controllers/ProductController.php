@@ -40,6 +40,14 @@ class ProductController extends Controller
     public function add(Request $request){
         $request->validate([
             'name' => 'required|max:255',
+            'cat_id' => 'required',
+            'brand_id' => 'required|max:255',
+            'short_description' => 'required|max:255',
+            'long_description' => 'required|max:550',
+            'price' => 'required',
+            'image' => 'image',
+            'size' => 'required',
+            'color' => 'required',
         ]);
         $data = array();
         $data['name'] = $request->name;
@@ -101,9 +109,17 @@ class ProductController extends Controller
 
     public function update(Request $request, $id){
         $product = DB::table('products')->where('id', $id)->first();
-        $request->validate([
-            'name' => 'required|max:255',
-        ]);
+            $request->validate([
+                'name' => 'required|max:255',
+                'cat_id' => 'required',
+                'brand_id' => 'required|max:255',
+                'short_description' => 'required|max:255',
+                'long_description' => 'required|max:550',
+                'price' => 'required',
+                'image' => 'image',
+                'size' => 'required',
+                'color' => 'required',
+            ]);
         $data = array();
         $data['name'] = $request->name;
         $data['cat_id'] = $request->cat_id;

@@ -8,11 +8,11 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{ __('Create product') }}</h1>
+      <h1>{{ __('Product') }} <small>Edit Product</small></h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{ route('product.index') }}"><i class="fa fa-user"></i> product</a></li>
-        <li class="active">Create</li>
+        <li class="active">Edit</li>
       </ol>
     </section>
    <!-- Main content -->
@@ -21,7 +21,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ __('Create a new product') }}</h3>
+              <h3 class="box-title">{{ __('Edit Product') }}</h3>
             </div>
             <!-- /.box-header -->
             <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
@@ -69,18 +69,33 @@
                           <div class="form-group">
                             <label for="inputproductName"> {{ __('Product price') }}</label>
                             <input type="number" name="price" class="form-control" value="{{ $product->price }}">
+                            @error('price')
+                              <span class="invalid-feedback text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                              </span>
+                            @enderror
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="inputproductName"> {{ __('Product size') }}</label>
                             <input type="text" name="size" class="form-control" value="{{ $product->size }}">
+                            @error('size')
+                              <span class="invalid-feedback text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                              </span>
+                            @enderror
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="inputproductName"> {{ __('Product color') }}</label>
                             <input type="text" name="color" class="form-control" value="{{ $product->color }}">
+                            @error('color')
+                              <span class="invalid-feedback text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                              </span>
+                            @enderror
                           </div>
                         </div>
                       </div>
