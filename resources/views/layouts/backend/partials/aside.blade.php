@@ -38,8 +38,9 @@
     <li class="{{ request()->is('dashboard/brand/create') ? 'active' : '' }}"><a href="{{ route('brand.create') }}"><i class="fa fa-th"></i> <span>Add Brand</span></a></li>
     <li class="{{ request()->is('dashboard/product') ? 'active' : '' }}"><a href="{{ route('product.index') }}"><i class="fa fa-list"></i> <span>All Products</span></a></li>
     <li class="{{ request()->is('dashboard/product/create') ? 'active' : '' }}"><a href="{{ route('product.create') }}"><i class="fa  fa-shopping-cart"></i> <span>Add Product</span></a></li>
-    <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Slider</span></a></li>
-    <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Social Link</span></a></li>
+    <li class="{{ request()->is('dashboard/slider') ? 'active' : '' }}"><a href="{{ route('slider.index') }}"><i class="fa fa-list"></i> <span>All Slider</span></a></li>
+    <li class="{{ request()->is('dashboard/slider/create') ? 'active' : '' }}"><a href="{{ route('slider.create') }}"><i class="fa fa-image"></i> <span>Add Slider</span></a></li>
+    <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href=""><i class="fa fa-th"></i> <span>Social Link</span></a></li>
     <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Shop Name</span></a></li>
     <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a href="#"><i class="fa fa-th"></i> <span>Delivery Mans</span></a></li>
   </ul>

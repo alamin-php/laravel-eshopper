@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
@@ -47,5 +48,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('dashboard/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('dashboard/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
     Route::get('dashboard/product/approval/{id}', [ProductController::class, 'productApproval'])->name('product.product_approval');
+    // Slider route here 
+    Route::get('dashboard/slider', [SliderController::class, 'index'])->name('slider.index');
+    Route::get('dashboard/slider/create', [SliderController::class, 'create'])->name('slider.create');
+    Route::post('dashboard/slider/add', [SliderController::class, 'add'])->name('slider.add');
+    Route::get('dashboard/slider/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
+    Route::post('dashboard/slider/update/{id}', [SliderController::class, 'update'])->name('slider.update');
+    Route::get('dashboard/slider/delete/{id}', [SliderController::class, 'delete'])->name('slider.delete');
+    Route::get('dashboard/slider/approval/{id}', [SliderController::class, 'sliderApproval'])->name('slider.slider_approval');
 });
 
