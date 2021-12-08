@@ -142,8 +142,9 @@
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-	
+	@if(request()->is('/'))
 	@include('layouts.frontend.partials.slider')
+	@endif
 	@include('layouts.frontend.partials.sidebar')
 	
 

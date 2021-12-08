@@ -22,6 +22,7 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/product/category/{id}', [HomeController::class, 'productByCategory'])->name('product.byCategory');
 Route::get('/product/brand/{id}', [HomeController::class, 'productByBrand'])->name('product.byBrand');
+Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->name('product.details');
 
 // Backend route
 Route::group(['middleware' => 'auth'], function(){
