@@ -1,7 +1,7 @@
 @extends('layouts.backend.app')
 @section('title','Create Slider')
 @push('styles')
-
+<link rel="stylesheet" href="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 @endpush
 
 @section('content')
@@ -28,54 +28,61 @@
               @csrf
                 <div class="box-body">
                   <div class="row">
-                    <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="sliderTitle"> {{ __('Slider Title') }}</label>
-                            <input type="text" name="slider_title" class="form-control" id="sliderTitle" placeholder="Enter slider title">
-                            @error('slider_title')
-                              <span class="invalid-feedback text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                              </span>
-                            @enderror
-                          </div>
-                          <div class="form-group">
-                            <label for="btn_title"> {{ __('Button Title') }}</label>
-                            <input type="text" name="btn_title" class="form-control" id="sliderTitle" placeholder="Enter slider title">
-                            @error('btn_title')
-                              <span class="invalid-feedback text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                              </span>
-                            @enderror
-                          </div>
-                          <div class="form-group">
-                            <label for="btn_link"> {{ __('Button Link') }}</label>
-                            <input type="text" name="btn_link" class="form-control" id="sliderTitle" placeholder="Enter slider title">
-                            @error('btn_link')
-                              <span class="invalid-feedback text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                              </span>
-                            @enderror
-                          </div>
-                          <div class="form-group">
-                            <label for="slider_discription"> {{ __('Slider discription') }}</label>
-                            <textarea name="slider_discription" id="" cols="30" rows="6" class="form-control" id="slider_discription" placeholder="Enter slider details"></textarea>
-                            @error('slider_discription')
-                              <span class="invalid-feedback text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                              </span>
-                            @enderror
-                          </div>
-                          <div class="form-group">
-                          <label for="sliderImage"> {{ __('Image') }}</label>
+                    <div class="col-md-9">
+                      <div class="form-group">
+                        <label for="sliderTitle"> {{ __('Slider Title') }}</label>
+                        <input type="text" name="slider_title" class="form-control" id="sliderTitle" placeholder="Enter slider title">
+                        @error('slider_title')
+                          <span class="invalid-feedback text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
+                      </div>
+                      <div class="form-group">
+                        <label for="btn_title"> {{ __('Button Title') }}</label>
+                        <input type="text" name="btn_title" class="form-control" id="sliderTitle" placeholder="Enter slider title">
+                        @error('btn_title')
+                          <span class="invalid-feedback text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
+                      </div>
+                      <div class="form-group">
+                        <label for="btn_link"> {{ __('Button Link') }}</label>
+                        <input type="text" name="btn_link" class="form-control" id="sliderTitle" placeholder="Enter slider title">
+                        @error('btn_link')
+                          <span class="invalid-feedback text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
+                      </div>
+                      <div class="form-group">
+                        <label for="slider_description"> {{ __('Slider discription') }}</label>
+                        <textarea class="textarea" name="slider_description" placeholder="Enter product short description"
+                        style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                        @error('slider_description')
+                          <span class="invalid-feedback text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="sliderImage"> {{ __('Upload Image') }}</label>
                           <input type="file" name="image" id="inputImage" accept="iamge/*" class="upload" onchange="readURL(this);">
-                          <img class="img-fulid" id="image" src="" alt="Upload slider image">
-                          </div>
-                          <div class="checkbox">
+                        </div>
+                        <div class="form-group">
+                          <img class="img-fulid" id="image" src="" alt="Slider image">
+                        </div>
+                        <div class="checkbox">
                           <label>
                           <input type="checkbox" name="status" value="1">
-                          This product will be publish?
+                          This slider will be publish?
                           </label>
                         </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -92,6 +99,12 @@
   </div>
 @endsection
 @push('scripts')
+<script src="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
+<script>
+  $(function () {
+    $('.textarea').wysihtml5()
+  })
+</script>
 <script type="text/javascript">
         function readURL(input){
             if(input.files && input.files[0]){

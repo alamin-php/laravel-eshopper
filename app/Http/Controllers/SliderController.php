@@ -86,11 +86,6 @@ class SliderController extends Controller
         $data['slider_description'] = $request->slider_description;
         $data['btn_link'] = $request->btn_link;
         $data['btn_title'] = $request->btn_title;
-        if($request->has('status') == 1){
-            $data['status'] = true;
-        }else{
-            $data['status'] = false;
-        }
         $image = $request->file('image');
 
         if ($image) {
