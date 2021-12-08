@@ -1,9 +1,11 @@
 @extends('layouts.frontend.app')
-@section('title','Home')
+@section('title','Product Brand')
 @section('content')
-<div class="features_items"><!--features_items-->
-@include('frontend.partials.features_items')    
-</div><!--features_items-->
+<div class="features_items">
+    <!-- category wise features_items-->
+    @include('frontend.partials.features_items')    
+</div>
+<!--features_items-->
 
 <div class="category-tab"><!--category-tab-->
     <div class="col-sm-12">

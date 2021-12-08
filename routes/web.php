@@ -18,10 +18,12 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-
+// Frontend route 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/product/category/{id}', [HomeController::class, 'productByCategory'])->name('product.byCategory');
+Route::get('/product/brand/{id}', [HomeController::class, 'productByBrand'])->name('product.byBrand');
 
-
+// Backend route
 Route::group(['middleware' => 'auth'], function(){
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
     // Category route here 
