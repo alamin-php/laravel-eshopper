@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
@@ -23,6 +24,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/product/category/{id}', [HomeController::class, 'productByCategory'])->name('product.byCategory');
 Route::get('/product/brand/{id}', [HomeController::class, 'productByBrand'])->name('product.byBrand');
 Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->name('product.details');
+Route::post('/product/add_cart/', [CartController::class, 'addCart'])->name('product.addCart');
 
 // Backend route
 Route::group(['middleware' => 'auth'], function(){

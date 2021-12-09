@@ -43,13 +43,13 @@ class HomeController extends Controller
     }
 
     public function productDetails($id){
-        $products = DB::table('products')
+        $product = DB::table('products')
         ->join('categories', 'categories.id','=', 'products.cat_id')
         ->join('brands', 'brands.id','=', 'products.brand_id')
         ->select('products.*', 'categories.category_name', 'brands.brand_name')
         ->where('products.status', true)
         ->where('products.id', $id)
         ->first();
-        return view("frontend.product_details",['products'=>$products]);
+        return view("frontend.product_details",['product'=>$product]);
     }
 }
