@@ -24,7 +24,9 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/product/category/{id}', [HomeController::class, 'productByCategory'])->name('product.byCategory');
 Route::get('/product/brand/{id}', [HomeController::class, 'productByBrand'])->name('product.byBrand');
 Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->name('product.details');
+Route::get('/product/show_cart/', [CartController::class, 'showCart'])->name('product.showCart');
 Route::post('/product/add_cart/', [CartController::class, 'addCart'])->name('product.addCart');
+Route::get('/product/remove_cart/{id}', [CartController::class, 'removeCart'])->name('product.removeCart');
 
 // Backend route
 Route::group(['middleware' => 'auth'], function(){

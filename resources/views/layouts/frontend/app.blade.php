@@ -13,6 +13,8 @@
     <link href="{{ asset('/frontend/css/animate.css') }}" rel="stylesheet">
 	<link href="{{ asset('/frontend/css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('/frontend/css/responsive.css') }}" rel="stylesheet">
+	  <!-- Toastr Style -->
+	  <link rel="stylesheet" href="{{ asset('backend/dist/css/toastr.min.css') }}">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -89,7 +91,7 @@
 								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="{{ route('product.showCart') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>
@@ -118,7 +120,10 @@
                                         <li><a href="shop.html">Products</a></li>
 										<li><a href="product-details.html">Product Details</a></li> 
 										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
+										<?php 
+											$count = Cart::count();
+										?>
+										<li><a href="{{ route('product.addCart') }}">Cart {{ $count }}</a></li> 
 										<li><a href="login.html">Login</a></li> 
                                     </ul>
                                 </li> 
@@ -315,5 +320,8 @@
 	<script src="{{ asset('frontend/js/price-range.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+	<!-- Toaster JS -->
+	<script src="{{ asset('backend/dist/js/toastr.min.js') }}"></script>
+	{!! Toastr::message() !!}
 </body>
 </html>
