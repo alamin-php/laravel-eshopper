@@ -26,6 +26,7 @@ Route::get('/product/brand/{id}', [HomeController::class, 'productByBrand'])->na
 Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->name('product.details');
 Route::get('/product/show_cart/', [CartController::class, 'showCart'])->name('product.showCart');
 Route::post('/product/add_cart/', [CartController::class, 'addCart'])->name('product.addCart');
+Route::post('/product/update_cart/', [CartController::class, 'updateCart'])->name('product.updateCart');
 Route::get('/product/remove_cart/{id}', [CartController::class, 'removeCart'])->name('product.removeCart');
 
 // Backend route

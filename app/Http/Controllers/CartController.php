@@ -31,6 +31,14 @@ class CartController extends Controller
         }
     }
 
+    public function updateCart(Request $request){
+        $qty = $request->qty;
+        $rowId = $request->rowId;
+        Cart::update($rowId, $qty);
+        Toastr::success('Product updated into Cart', 'Success');
+       return redirect()->back();
+    }
+
     public function removeCart($rowId){
        Cart::remove($rowId);
        Toastr::success('Product removed from Cart', 'Success');

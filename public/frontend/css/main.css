@@ -2439,3 +2439,19 @@ textarea {
 .contact-info .social-networks ul li a:hover {
     color: #FE980F;
 }
+
+
+/* =================Custom CSS Here==================  */
+
+button.cart-update-btn {
+    margin-left: 5px;
+    outline: none;
+    border: 1px solid #444;
+    border-radius: 0px;
+}
+.cart_quantity_input {
+    outline: none;
+    border: 1px solid #444;
+    border-radius: 0px;
+    padding: 3px;
+}
